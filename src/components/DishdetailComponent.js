@@ -15,10 +15,12 @@ class DishDetail extends Component{
     renderComments(dish){
         const comments = dish.comments.map((comment) => {
             return (
-                <div key={comment.id}>
+                <ul key={comment.id} class = "list-unstyled">
+                    <li>
                         <p>{comment.comment}</p>
                         <p>-- {comment.author}, {comment.date.slice(0, 10)}</p>
-                </div>
+                    </li>
+                </ul>
             );
         });
 
