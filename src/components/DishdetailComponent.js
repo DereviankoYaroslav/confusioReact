@@ -12,36 +12,48 @@ class DishDetail extends Component{
         }
     }
 
-    render() {
-
-        /* const details = this.props.dishes.map((dish) => {
+    renderComments(dish){
+        const comments = dish.comments.map((comment) => {
             return (
-              <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardBody>
-                        <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card> 
-              </div>
+                <div key={comment.id}>
+                        <p>{comment.comment}</p>
+                        <p>-- {comment.author}, {comment.date.slice(0, 10)}</p>
+                </div>
             );
-        }); */
+        });
 
-
-        console.log(this.props.selectedDish);
-        const details = this.props.selectedDish;
-        return (
-            <div key={details.id}>
-            <Card>
-                <CardImg width="100%" src={details.image} alt={details.name} />
-                <CardBody>
-                    <CardTitle>{details.name}</CardTitle>
-                    <CardText>{details.description}</CardText>
-                </CardBody>
-            </Card> 
+        return(
+            <div>
+                <h4>Comments</h4>
+                {comments}
             </div>
         );
+    }
+
+    render() {
+        if (this.props.selectedDish != null){
+            const details = this.props.selectedDish;
+            return (
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                    <Card>
+                        <CardImg width="100%" src={details.image} alt={details.name} />
+                        <CardBody>
+                            <CardTitle tag="h5">{details.name}</CardTitle>
+                            <CardText>{details.description}</CardText>
+                        </CardBody>
+                    </Card> 
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        {this.renderComments(details)}
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <div></div>
+            );
+        }
     }
 }
 
