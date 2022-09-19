@@ -1,24 +1,21 @@
 import { Component } from "react";
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 
 
 class DishDetail extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
+    componentDidUpdate(){
+        console.log('update');
     }
 
     renderComments(dish){
         const comments = dish.comments.map((comment) => {
             return (
-                <ul key={comment.id} class = "list-unstyled">
+                <ul key={comment.id} className = "list-unstyled">
                     <li>
                         <p>{comment.comment}</p>
-                        <p>-- {comment.author}, {comment.date.slice(0, 10)}</p>
+                        <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                     </li>
                 </ul>
             );
@@ -33,21 +30,24 @@ class DishDetail extends Component{
     }
 
     render() {
+
         if (this.props.selectedDish != null){
             const details = this.props.selectedDish;
             return (
-                <div className="row">
-                    <div className="col-12 col-md-5 m-1">
-                    <Card>
-                        <CardImg width="100%" src={details.image} alt={details.name} />
-                        <CardBody>
-                            <CardTitle tag="h5">{details.name}</CardTitle>
-                            <CardText>{details.description}</CardText>
-                        </CardBody>
-                    </Card> 
-                    </div>
-                    <div className="col-12 col-md-5 m-1">
-                        {this.renderComments(details)}
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-md-5 m-1">
+                        <Card>
+                            <CardImg width="100%" src={details.image} alt={details.name} />
+                            <CardBody>
+                                <CardTitle tag="h5">{details.name}</CardTitle>
+                                <CardText>{details.description}</CardText>
+                            </CardBody>
+                        </Card> 
+                        </div>
+                        <div className="col-12 col-md-5 m-1">
+                            {this.renderComments(details)}
+                        </div>
                     </div>
                 </div>
             );
