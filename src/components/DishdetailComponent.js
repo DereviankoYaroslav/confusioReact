@@ -1,5 +1,6 @@
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import Comment from './CommentForm';
 
 
 
@@ -18,6 +19,7 @@ import { Link } from 'react-router-dom';
                             );
                         })}
                     </ul>
+                    <Comment></Comment>
                 </div>
             );
         else 
