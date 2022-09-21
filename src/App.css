@@ -31,3 +31,20 @@ address{
 .navbar-dark {
   background-color: #512DA8;
 }
+
+.modal-header > button {
+  height: 18px;
+  width: 18px;
+  border-radius: 20%;
+  background-image: url('../public/assets/images/109602.png');
+  background-size: 18px;
+  background-position: 0px 0px 0px 0px;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  border: none;
+  background-color: white;
+}
+
+.modal-header > button:hover{
+  cursor: pointer;
+}
