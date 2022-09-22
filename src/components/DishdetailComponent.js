@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Comment from './CommentForm';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 
@@ -12,14 +13,18 @@ import { baseUrl } from '../shared/baseUrl';
                 <div>
                     <h4>Comments</h4>
                     <ul className='list-unstyled'>
+                    <Stagger in>
                         {comments.map((comment) => {
                             return(
+                                <Fade in>
                                 <li key={comment.id}>
                                 <p>{comment.comment}</p>
                                 <p>-- {comment.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                                 </li>
+                                </Fade>
                             );
                         })}
+                    </Stagger>
                     </ul>
                     <Comment dishId={dishId} postComment={postComment}></Comment>
                 </div>
@@ -33,13 +38,19 @@ import { baseUrl } from '../shared/baseUrl';
 
     function RenderDish({dish}){
             return (
+            <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
             <Card>
                 <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
                 <CardBody>
                     <CardTitle tag="h5">{dish.name}</CardTitle>
                     <CardText>{dish.description}</CardText>
                 </CardBody>
-            </Card>     
+            </Card>   
+            </FadeTransform>  
             );
     }
 
