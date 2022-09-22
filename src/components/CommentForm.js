@@ -25,7 +25,7 @@ class Comment extends Component {
     }
 
     handleSubmit(values){
-        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });
