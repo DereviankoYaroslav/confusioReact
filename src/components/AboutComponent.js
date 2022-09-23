@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'r
 import { Link } from 'react-router-dom';
 import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { baseUrl } from '../shared/baseUrl';
-
+import { Loading } from './LoadingComponent';
 
 function RenderLeader({leaders, isLoading, errMess}){
 
@@ -45,6 +45,25 @@ function RenderLeader({leaders, isLoading, errMess}){
 
 function About(props) {
 
+    if(props.isLoading){
+        return(
+            <div className='container'>
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        );
+    } else if (props.errMess){
+        return(
+            <div className='container'>
+                <div className='row'>
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+
+    else if (props != null){
     return(
         <div className="container">
             <div className="row">
@@ -107,6 +126,7 @@ function About(props) {
             </div>
         </div>
     );
+    }
 }
 
 export default About;    
