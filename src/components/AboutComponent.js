@@ -5,38 +5,45 @@ import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { baseUrl } from '../shared/baseUrl';
 
 
-function RenderLeader({leader, isLoading, errMess}){
+function RenderLeader({leaders, isLoading, errMess}){
 
+    console.log(leaders);
+    if (leaders != null)
     return (
+        <div>
         <Stagger in>
-        <Fade in>
-        <div key={leader.id} className="col-12 mt-5">
-        <Media tag="li">
-            <Media left middle>
-                <Media object src={baseUrl + leader.image} alt={leader.name} />
+        {leaders.map((leader) => {
+            return(
+            <Fade in>
+            <div key={leader.id} className="col-12 mt-5">
+            <Media tag="li">
+                <Media left middle>
+                    <Media object src={baseUrl + leader.image} alt={leader.name} />
+                </Media>
+                <Media body className="ml-5">
+                <Media heading>{leader.name}</Media>
+                <p>{leader.designation}</p>
+                <p>{leader.description}</p>
+                </Media>
             </Media>
-            <Media body className="ml-5">
-            <Media heading>{leader.name}</Media>
-            <p>{leader.designation}</p>
-            <p>{leader.description}</p>
-            </Media>
-        </Media>
-        </div>
-        </Fade>
+            </div>
+            </Fade>
+            );
+        })}
         </Stagger>
-    );
+        </div>
+    )
+    else
+        return (
+            <div></div>
+        );  
+        
+    
 
 }
 
 
 function About(props) {
-
-    const leaders = props.leaders.leaders.map((leader) => {
-        console.log(leader);
-        return (
-            <RenderLeader leader={leader} />
-        );
-    }); 
 
     return(
         <div className="container">
@@ -94,7 +101,7 @@ function About(props) {
                 </div>
                 <div className="col-12">
                     <Media list>
-                        {leaders}
+                        <RenderLeader leaders={props.leaders.leaders} />
                     </Media>
                 </div>
             </div>
